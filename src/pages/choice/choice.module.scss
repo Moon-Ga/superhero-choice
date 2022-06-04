@@ -1,0 +1,23 @@
+.choice {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .firstHalf,
+  .secondHalf {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    margin: 8px;
+
+    .cardContainer {
+      max-height: 300px;
+      cursor: pointer;
+    }
+  }
+
+  .line {
+    border-top: 10px solid black;
+  }
+}
