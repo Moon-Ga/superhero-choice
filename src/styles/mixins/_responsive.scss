@@ -1,0 +1,23 @@
+@mixin after($vw) {
+  @if $vw == 'xl' {
+    @media (min-width: 1280px) {
+      @content;
+    }
+  } @else if $vw == 'lg' {
+    @media (min-width: 1024px) {
+      @content;
+    }
+  } @else if $vw == 'md' {
+    @media (min-width: 768px) {
+      @content;
+    }
+  } @else if $vw == 'sm' {
+    @media (min-width: 640px) {
+      @content;
+    }
+  } @else if $vw == 'xs' {
+    @media (min-width: 480px) {
+      @content;
+    }
+  }
+}
