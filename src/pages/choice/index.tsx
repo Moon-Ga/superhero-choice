@@ -15,7 +15,7 @@ function Choice() {
     const setStorage = (array: Selected[]) =>
       store.set('selectedHeroes', array);
     const storageFinder = storage.findIndex(
-      (item: Selected) => item.heroId.id === id.toString()
+      (item: Selected) => item.heroId === id.toString()
     );
     if (storageFinder !== -1) {
       const newObject = [...storage];
