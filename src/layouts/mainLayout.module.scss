@@ -1,0 +1,14 @@
+@use 'src/styles/mixins/responsive';
+
+.mainLayout {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  .content {
+    flex: 1;
+    @include responsive.after('lg') {
+      padding: 1rem;
+    }
+  }
+}
