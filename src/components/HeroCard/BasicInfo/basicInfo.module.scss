@@ -1,16 +1,27 @@
 @use 'src/styles/constants/colors';
+@use 'src/styles/mixins/responsive';
 
 .basicInfo {
   display: flex;
   width: 100%;
   height: 100%;
 
+  @include responsive.after('lg') {
+    flex-direction: column;
+  }
+
   .imageContainer {
     width: 40%;
+
+    @include responsive.after('lg') {
+      width: 100%;
+      height: 100%;
+    }
 
     .image {
       width: 100%;
       height: 100%;
+      max-height: 700px;
       object-fit: cover;
     }
   }
@@ -18,21 +29,25 @@
   .info {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 60%;
-    padding: 16px;
+    padding: 1rem;
+    @include responsive.after('lg') {
+      flex: 1;
+      width: 100%;
+    }
 
     .nameContainer {
-      margin-bottom: 16px;
+      margin-bottom: 1rem;
 
       .name {
-        margin-bottom: 8px;
-        font-size: 30px;
+        margin-bottom: 0.5rem;
+        font-size: 1.875rem;
       }
 
       .fullname {
-        margin-left: 2px;
-        font-size: 20px;
+        margin-left: 0.125rem;
+        font-size: 1.25rem;
         color: colors.$gray-400;
       }
     }
@@ -44,12 +59,12 @@
           align-items: center;
 
           &:not(:last-child) {
-            margin-bottom: 8px;
+            margin-bottom: 0.5rem;
           }
 
           .label {
-            margin-right: 8px;
-            font-size: 18px;
+            margin-right: 0.5rem;
+            font-size: 1.125rem;
           }
 
           .weak {

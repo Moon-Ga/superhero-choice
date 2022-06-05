@@ -1,4 +1,5 @@
 @use './constants/colors';
+@use './mixins/responsive';
 
 @import './base/reset';
 @import './base/more';
@@ -6,4 +7,8 @@
 
 html {
   color: colors.$gray-300;
+
+  @include responsive.after('lg') {
+    font-size: 20px;
+  }
 }

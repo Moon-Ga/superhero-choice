@@ -6,9 +6,10 @@ import styles from './heroCard.module.scss';
 
 type HeroCardProps = {
   heroId: number;
+  onClick: (id: number, data: string) => void;
 };
-function HeroCard({ heroId }: HeroCardProps) {
-  const { data } = useQuery(['firstHero', heroId], () => getHero(heroId));
+function HeroCard({ heroId, onClick }: HeroCardProps) {
+  const { data } = useQuery(['superhero', heroId], () => getHero(heroId));
 
   if (!data) {
     return (
@@ -19,7 +20,12 @@ function HeroCard({ heroId }: HeroCardProps) {
   }
 
   return (
-    <div className={styles.heroCard}>
+    <div
+      role="button"
+      tabIndex={0}
+      className={styles.heroCard}
+      onClick={() => onClick(heroId, data.id)}
+    >
       <BasicInfo data={data} />
     </div>
   );

@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-const SelectedHerosState = atom<string[]>({
+const SelectedHerosState = atom<HeroInfo[]>({
   key: 'selectedHerosState',
   default: [],
 });
