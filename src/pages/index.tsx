@@ -1,10 +1,12 @@
-import MainLayout from 'layouts/MainLayout';
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import store from 'store';
-import styles from './app.module.scss';
+
+import MainLayout from 'layouts/MainLayout';
 import Choice from './choice';
 import Rankings from './rankings';
+
+import styles from './app.module.scss';
 
 function App() {
   useEffect(() => {

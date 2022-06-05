@@ -1,12 +1,15 @@
-import HeroCard from 'components/HeroCard';
-import { randomId } from 'utils/constants';
+import { useState } from 'react';
 import store from 'store';
 
-import { useState } from 'react';
+import { randomId } from 'utils/constants';
+
+import HeroCard from 'components/HeroCard';
+
 import styles from './choice.module.scss';
 
 function Choice() {
   const [, setIsClicked] = useState<boolean>(false);
+
   const firstHeroId = randomId();
   const secondHeroId = randomId();
 
@@ -32,19 +35,19 @@ function Choice() {
   };
 
   return (
-    <div className={styles.choice}>
-      <div className={styles.firstHalf}>
+    <main className={styles.choice}>
+      <section className={styles.firstHalf}>
         <div className={styles.cardContainer}>
           <HeroCard heroId={firstHeroId} onClick={onCardClick} />
         </div>
-      </div>
+      </section>
       <div className={styles.line} />
-      <div className={styles.secondHalf}>
+      <section className={styles.secondHalf}>
         <div className={styles.cardContainer}>
           <HeroCard heroId={secondHeroId} onClick={onCardClick} />
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
 

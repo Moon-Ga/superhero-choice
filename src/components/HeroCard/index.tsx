@@ -1,7 +1,10 @@
-import Spinner from 'components/common/Spinner';
 import { useQuery } from 'react-query';
+
 import { getHero } from 'utils/getHero';
+
+import Spinner from 'components/common/Spinner';
 import BasicInfo from './BasicInfo';
+
 import styles from './heroCard.module.scss';
 
 type HeroCardProps = {

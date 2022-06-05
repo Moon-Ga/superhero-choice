@@ -1,6 +1,8 @@
-import HeroCard from 'components/HeroCard';
 import store from 'store';
 import _ from 'lodash';
+
+import HeroCard from 'components/HeroCard';
+
 import styles from './rankings.module.scss';
 
 function Rankings() {
@@ -24,9 +26,9 @@ function Rankings() {
     });
 
   return (
-    <div className={styles.rankings}>
+    <main className={styles.rankings}>
       <ul className={styles.rankingsList}>{list}</ul>
-    </div>
+    </main>
   );
 }
 

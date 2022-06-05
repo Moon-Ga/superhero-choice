@@ -1,5 +1,7 @@
-import GNB from 'components/GNB';
 import { Outlet } from 'react-router-dom';
+
+import GNB from 'components/GNB';
+
 import styles from './mainLayout.module.scss';
 
 function MainLayout() {

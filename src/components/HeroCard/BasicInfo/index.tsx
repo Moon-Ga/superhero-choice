@@ -1,4 +1,5 @@
 import { NoImageImage } from 'assets/svgs';
+
 import styles from './basicInfo.module.scss';
 
 type BasicInfoProps = {
@@ -32,6 +33,7 @@ function BasicInfo({ data }: BasicInfoProps) {
     }
     return 'god';
   };
+
   const statItems = Object.values(data.powerstats).map((stat, idx) => {
     const key = `${data.id}-${stat}-${idx}`;
     const point = stat !== 'null' ? stat : '정보 없음';
