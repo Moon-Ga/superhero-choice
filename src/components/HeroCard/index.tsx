@@ -17,7 +17,7 @@ function HeroCard({ heroId, onClick }: HeroCardProps) {
   if (!data) {
     return (
       <div className={styles.loading}>
-        <Spinner />;
+        <Spinner />
       </div>
     );
   }
