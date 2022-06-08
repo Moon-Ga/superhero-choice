@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useQuery } from 'react-query';
 
 import { getHero } from 'utils/getHero';
@@ -6,12 +7,14 @@ import Spinner from 'components/common/Spinner';
 import BasicInfo from './BasicInfo';
 
 import styles from './heroCard.module.scss';
+import DetailedInfo from './DetailedInfo';
 
 type HeroCardProps = {
   heroId: number;
   onClick: (id: number, data: string) => void;
 };
 function HeroCard({ heroId, onClick }: HeroCardProps) {
+  const [isDetail, setIsDetail] = useState<boolean>(false);
   const { data } = useQuery(['superhero', heroId], () => getHero(heroId));
 
   if (!data) {
@@ -29,7 +32,7 @@ function HeroCard({ heroId, onClick }: HeroCardProps) {
       className={styles.heroCard}
       onClick={() => onClick(heroId, data.id)}
     >
-      <BasicInfo data={data} />
+      {isDetail ? <BasicInfo data={data} /> : <DetailedInfo data={data} />}
     </div>
   );
 }

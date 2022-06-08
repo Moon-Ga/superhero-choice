@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import store from 'store';
 
-import { randomId } from 'utils/constants';
+import { maxIdNumber, minIdNumber, randomId } from 'utils/constants';
 
 import HeroCard from 'components/HeroCard';
 
@@ -10,8 +10,8 @@ import styles from './choice.module.scss';
 function Choice() {
   const [, setIsClicked] = useState<boolean>(false);
 
-  const firstHeroId = randomId();
-  const secondHeroId = randomId();
+  const firstHeroId = randomId(minIdNumber, maxIdNumber);
+  const secondHeroId = randomId(minIdNumber, maxIdNumber);
 
   const onCardClick = (id: number, heroId: string) => {
     const storage = store.get('selectedHeroes');

@@ -6,7 +6,7 @@ type BasicInfoProps = {
   data: HeroInfo;
 };
 function BasicInfo({ data }: BasicInfoProps) {
-  const labels = ['근력', '지능', '속력', '내구력', '위력', '전투력'];
+  const labels = ['근력', '지력', '속력', '내구력', '위력', '전투 기술'];
 
   const statColor = (statpoint: string) => {
     if (statpoint === '정보 없음') {

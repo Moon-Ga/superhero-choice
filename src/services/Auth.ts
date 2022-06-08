@@ -21,7 +21,7 @@ const getProvider = (provider: string) => {
   }
 };
 
-export const login = (provider: string) => {
+export const providerLogin = (provider: string) => {
   const authProvider = getProvider(provider);
   return signInWithPopup(auth, authProvider);
 };
