@@ -38,10 +38,10 @@ function BasicInfo({ data }: BasicInfoProps) {
     const key = `${data.id}-${stat}-${idx}`;
     const point = stat !== 'null' ? stat : '정보 없음';
     return (
-      <li key={key} className={styles.statItem}>
-        <span className={styles.label}>{labels[idx]}</span>
-        <span className={styles[statColor(point)]}>{point}</span>
-      </li>
+      <div key={key} className={styles.statItem}>
+        <dt className={styles.label}>{labels[idx]}</dt>
+        <dd className={styles[statColor(point)]}>{point}</dd>
+      </div>
     );
   });
 
@@ -69,7 +69,7 @@ function BasicInfo({ data }: BasicInfoProps) {
           <span className={styles.fullname}>{fullname}</span>
         </div>
         <div className={styles.stats}>
-          <ul className={styles.statItems}>{statItems}</ul>
+          <dl className={styles.statItems}>{statItems}</dl>
         </div>
       </div>
     </div>

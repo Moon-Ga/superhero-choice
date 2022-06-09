@@ -11,9 +11,9 @@ import { firebaseApp } from './Firebase';
 
 const db = getFirestore(firebaseApp);
 
-export default class Firestore {
-  static async newUser(userid: string, userData: object) {
-    const docRef = doc(db, 'users', userid);
+export default class User {
+  static async newUser(uid: string, userData: object) {
+    const docRef = doc(db, 'users', uid);
     const docSnap = await getDoc(docRef);
     if (!docSnap.exists()) {
       await setDoc(docRef, userData);

@@ -1,8 +1,11 @@
 import { atom } from 'recoil';
 
-const SelectedHerosState = atom<HeroInfo[]>({
+export const SelectedHerosState = atom<HeroInfo[]>({
   key: 'selectedHerosState',
   default: [],
 });
 
-export { SelectedHerosState };
+export const CurrentUserState = atom({
+  key: 'selectedHerosState',
+  default: { name: '', email: '', imageURL: '' },
+});
