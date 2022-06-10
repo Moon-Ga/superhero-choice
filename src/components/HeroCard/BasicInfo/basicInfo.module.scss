@@ -8,6 +8,7 @@
 
   @include responsive.after('lg') {
     flex-direction: column;
+    max-height: none;
   }
 
   .imageContainer {

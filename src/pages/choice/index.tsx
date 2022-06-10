@@ -39,7 +39,7 @@ function Choice() {
           <HeroCard heroId={cardHeroId.first} onClick={onCardClick} />
         </div>
       </section>
-      <div className={styles.line} />
+      <div className={styles.text}>OR</div>
       <section className={styles.secondHalf}>
         <div className={styles.cardContainer}>
           <HeroCard heroId={cardHeroId.second} onClick={onCardClick} />
