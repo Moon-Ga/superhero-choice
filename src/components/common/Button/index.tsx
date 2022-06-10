@@ -19,6 +19,7 @@ function Button({
       // eslint-disable-next-line react/button-has-type
       type={type}
       className={cx(styles[theme], styles[size], props.className)}
+      onClick={props.onClick}
     >
       {children}
     </button>

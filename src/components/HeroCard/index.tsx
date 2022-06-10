@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import { getHero } from 'utils/getHero';
@@ -11,19 +11,12 @@ import DetailedInfo from './DetailedInfo';
 
 type HeroCardProps = {
   heroId: number;
-  onClick: (id: number, heroId: number) => void;
-  setShouldRefetch?: React.Dispatch<React.SetStateAction<boolean>>;
+  onClick?: MouseEventHandler<HTMLDivElement>;
 };
-function HeroCard({ heroId, onClick, setShouldRefetch }: HeroCardProps) {
-  const [isDetail, setIsDetail] = useState<boolean>(false);
+function HeroCard({ heroId, onClick }: HeroCardProps) {
+  const [isDetail, setDetail] = useState<boolean>(false);
 
-  const { data, isError } = useQuery(['superhero', heroId], () =>
-    getHero(heroId)
-  );
-
-  if (isError) {
-    return <div>Error</div>;
-  }
+  const { data } = useQuery(['superhero', heroId], () => getHero(heroId));
 
   if (!data || !data.id) {
     return (
@@ -37,8 +30,9 @@ function HeroCard({ heroId, onClick, setShouldRefetch }: HeroCardProps) {
     <div
       role="button"
       tabIndex={0}
+      data-heroid={heroId}
       className={styles.heroCard}
-      onClick={() => onClick(heroId, data.id)}
+      onClick={onClick}
     >
       {isDetail ? <DetailedInfo data={data} /> : <BasicInfo data={data} />}
     </div>

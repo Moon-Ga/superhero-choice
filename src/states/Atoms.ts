@@ -6,6 +6,6 @@ export const SelectedHerosState = atom<HeroInfo[]>({
 });
 
 export const CurrentUserState = atom({
-  key: 'selectedHerosState',
-  default: { name: '', email: '', imageURL: '' },
+  key: 'currentUserState',
+  default: { name: '', email: '', imageURL: '', uid: '' },
 });

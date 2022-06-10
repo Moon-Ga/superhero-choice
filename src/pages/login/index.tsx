@@ -1,36 +1,54 @@
 import { GithubIcon, GoogleIcon } from 'assets/svgs';
-import { MouseEvent, useState } from 'react';
+import { useRecoil } from 'hooks';
+import { MouseEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Auth from 'services/Auth';
-import User from 'services/Firestore';
+import { Firestore } from 'services/Firestore';
+import { CurrentUserState } from 'states';
 
 import styles from './login.module.scss';
 
 function Login() {
   const [onLogin, setOnLogin] = useState<boolean>(false);
 
+  const [currentUser] = useRecoil(CurrentUserState);
+
   const navigate = useNavigate();
 
   const loginWithProvider = (e: MouseEvent<SVGSVGElement>) => {
+    if (onLogin) return null;
+
+    setOnLogin(true);
+
     const provider = e.currentTarget.dataset.provider as string;
-    Auth.providerLogin(provider).then((data) => {
-      setOnLogin(true);
-      const userData = {
-        name: data.user.displayName,
-        email: data.user.email,
-        photoURL: data.user.photoURL,
-      };
-      User.newUser(data.user.uid, userData);
-    });
-    setOnLogin(false);
+
+    return Auth.providerLogin(provider)
+      .then((data) => {
+        const userData = {
+          name: data.user.displayName,
+          email: data.user.email,
+          photoURL: data.user.photoURL,
+        };
+        Firestore.newUser(data.user.uid, userData);
+      })
+      .catch(() => {
+        setOnLogin(false);
+      });
   };
 
   const onReturnButtonClick = () => {
     navigate(-1);
   };
 
+  useEffect(() => {
+    if (currentUser.name) {
+      navigate('/');
+    }
+  }, [currentUser, navigate]);
+
   return (
     <main className={styles.login}>
+      {onLogin && <div>로그인 중...</div>}
       <button
         type="button"
         className={styles.returnButton}

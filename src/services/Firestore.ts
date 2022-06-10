@@ -1,17 +1,20 @@
 import {
+  collection,
   doc,
   DocumentData,
   getDoc,
+  getDocs,
   getFirestore,
   onSnapshot,
   setDoc,
   updateDoc,
 } from 'firebase/firestore';
+
 import { firebaseApp } from './Firebase';
 
 const db = getFirestore(firebaseApp);
 
-export default class User {
+export class Firestore {
   static async newUser(uid: string, userData: object) {
     const docRef = doc(db, 'users', uid);
     const docSnap = await getDoc(docRef);
@@ -34,8 +37,34 @@ export default class User {
     const docRef = doc(db, 'users', userid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      await console.log(docSnap.data());
-      updateDoc(docRef, { [item]: data });
+      await updateDoc(docRef, { [item]: data });
     }
+  }
+
+  static async addRankings(heroId: number) {
+    const docRef = doc(db, 'rankings', heroId.toString());
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      await updateDoc(docRef, { count: docSnap.data().count + 1 });
+    } else {
+      await setDoc(docRef, { count: 1 });
+    }
+  }
+
+  static async getRankings() {
+    const collectionRef = collection(db, 'rankings');
+    const docSnap = await getDocs(collectionRef);
+    if (!docSnap.empty) {
+      const array: Selected[] = [];
+      docSnap.forEach((document) => {
+        const data = {
+          heroId: Number(document.id),
+          count: document.data().count,
+        };
+        array.push(data);
+      });
+      return array;
+    }
+    return null;
   }
 }

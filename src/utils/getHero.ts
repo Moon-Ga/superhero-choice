@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const PROXY = window.location.hostname === 'localhost' ? '' : 'proxy';
+// const PROXY = window.location.hostname === 'localhost' ? '' : 'proxy';
 
 const getHero = async (heroId: number) => {
   try {
