@@ -46,15 +46,13 @@ function BasicInfo({ data }: BasicInfoProps) {
   });
 
   const fullname =
-    data.biography['full-name'].length !== 0
-      ? data.biography['full-name']
-      : data.name;
+    data.biography.fullName.length !== 0 ? data.biography.fullName : data.name;
 
   return (
     <div className={styles.basicInfo}>
       <div className={styles.imageContainer}>
         <img
-          src={data.image.url}
+          src={data.images.lg}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
             currentTarget.src = NoImageImage;

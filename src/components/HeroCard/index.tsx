@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import { getHero } from 'utils/getHero';
@@ -11,13 +11,21 @@ import DetailedInfo from './DetailedInfo';
 
 type HeroCardProps = {
   heroId: number;
-  onClick: (id: number, data: string) => void;
+  onClick: (id: number, heroId: number) => void;
+  setShouldRefetch?: React.Dispatch<React.SetStateAction<boolean>>;
 };
-function HeroCard({ heroId, onClick }: HeroCardProps) {
+function HeroCard({ heroId, onClick, setShouldRefetch }: HeroCardProps) {
   const [isDetail, setIsDetail] = useState<boolean>(false);
-  const { data } = useQuery(['superhero', heroId], () => getHero(heroId));
 
-  if (!data) {
+  const { data, isError } = useQuery(['superhero', heroId], () =>
+    getHero(heroId)
+  );
+
+  if (isError) {
+    return <div>Error</div>;
+  }
+
+  if (!data || !data.id) {
     return (
       <div className={styles.loading}>
         <Spinner />
@@ -32,7 +40,7 @@ function HeroCard({ heroId, onClick }: HeroCardProps) {
       className={styles.heroCard}
       onClick={() => onClick(heroId, data.id)}
     >
-      {isDetail ? <BasicInfo data={data} /> : <DetailedInfo data={data} />}
+      {isDetail ? <DetailedInfo data={data} /> : <BasicInfo data={data} />}
     </div>
   );
 }

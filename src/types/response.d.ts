@@ -1,9 +1,12 @@
-interface Image {
-  url: string;
+interface Images {
+  xs: string;
+  sm: string;
+  md: string;
+  lg: string;
 }
 
 interface Connections {
-  'group-affiliation': string;
+  groupAffiliation: string;
   relatives: string;
 }
 
@@ -12,42 +15,42 @@ interface Work {
   base: string;
 }
 
+interface Biography {
+  fullName: string;
+  alterEgos: string;
+  aliases: string[];
+  placeOfBirth: string;
+  firstAppearance: string;
+  publisher: string;
+  alignment: string;
+}
+
 interface Appearance {
   gender: string;
   race: string;
   height: string[];
   weight: string[];
-  'eye-color': string;
-  'hair-color': string;
-}
-
-interface Biography {
-  'full-name': string;
-  'alter-egos': string;
-  aliases: string[];
-  'place-of-birth': string;
-  'first-appearance': string;
-  publisher: string;
-  alignment: string;
+  eyeColor: string;
+  hairColor: string;
 }
 
 interface Powerstats {
-  intelligence: string;
-  strength: string;
-  speed: string;
-  durability: string;
-  power: string;
-  combat: string;
+  intelligence: number;
+  strength: number;
+  speed: number;
+  durability: number;
+  power: number;
+  combat: number;
 }
 
 interface HeroInfo {
-  response: string;
-  id: string;
+  id: number;
   name: string;
+  slug: string;
   powerstats: Powerstats;
-  biography: Biography;
   appearance: Appearance;
+  biography: Biography;
   work: Work;
   connections: Connections;
-  image: Image;
+  images: Images;
 }

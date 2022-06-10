@@ -5,7 +5,7 @@ const PROXY = window.location.hostname === 'localhost' ? '' : 'proxy';
 const getHero = async (heroId: number) => {
   try {
     const res = await axios.get<HeroInfo>(
-      `${PROXY}/api/${process.env.REACT_APP_SUPERHERO_API_KEY}/${heroId}`
+      `https://akabab.github.io/superhero-api/api/id/${heroId}.json`
     );
     return res.data;
   } catch (error) {
