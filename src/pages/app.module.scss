@@ -1,2 +1,18 @@
-.app {
+@use 'src/styles/constants/colors';
+
+.appWrapper {
+  display: flex;
+  justify-content: center;
+  background-image: url('/assets/images/united-wallpaper.webp');
+  background-position: center;
+  background-size: cover;
+
+  .app {
+    position: relative;
+    display: flex;
+    flex: 1;
+    max-width: 1280px;
+    min-height: 100vh;
+    background: colors.$primary-bg;
+  }
 }

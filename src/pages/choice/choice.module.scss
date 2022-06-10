@@ -1,0 +1,36 @@
+@use 'src/styles/mixins/responsive';
+@use 'src/styles/constants/colors';
+
+.choice {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  @include responsive.after('lg') {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .firstHalf,
+  .secondHalf {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1rem;
+
+    .cardContainer {
+      max-height: 300px;
+      cursor: pointer;
+
+      @include responsive.after('lg') {
+        height: 100%;
+        max-height: none;
+      }
+    }
+  }
+
+  .line {
+    border-top: 10px solid colors.$black;
+  }
+}
