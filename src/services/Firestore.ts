@@ -42,28 +42,37 @@ export class Firestore {
   }
 
   static async addRankings(heroId: number) {
-    const docRef = doc(db, 'rankings', heroId.toString());
+    const docRef = doc(db, 'rankings', 'statistics');
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      await updateDoc(docRef, { count: docSnap.data().count + 1 });
+      if (docSnap.data().data) {
+        const itemIndex = docSnap
+          .data()
+          .data.findIndex((data: Selected) => data.heroId === heroId);
+        if (itemIndex !== -1) {
+          const newArray = [...docSnap.data().data];
+          newArray[itemIndex] = {
+            heroId,
+            count: newArray[itemIndex].count + 1,
+          };
+          await updateDoc(docRef, { data: newArray });
+        } else {
+          const newArray = [...docSnap.data().data, { heroId, count: 1 }];
+          await updateDoc(docRef, { data: newArray });
+        }
+      }
     } else {
-      await setDoc(docRef, { count: 1 });
+      await setDoc(docRef, { data: [{ heroId, count: 1 }] });
     }
   }
 
   static async getRankings() {
-    const collectionRef = collection(db, 'rankings');
-    const docSnap = await getDocs(collectionRef);
-    if (!docSnap.empty) {
-      const array: Selected[] = [];
-      docSnap.forEach((document) => {
-        const data = {
-          heroId: Number(document.id),
-          count: document.data().count,
-        };
-        array.push(data);
-      });
-      return array;
+    const docRef = doc(db, 'rankings', 'statistics');
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      if (docSnap.data().data) {
+        return docSnap.data().data;
+      }
     }
     return null;
   }
