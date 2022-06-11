@@ -8,7 +8,7 @@
   width: 100%;
   height: 100%;
 
-  @include animation.fade-in;
+  @include animation.fade-in(0.4s);
 
   @include responsive.after('lg') {
     flex-direction: column;

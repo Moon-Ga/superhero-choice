@@ -1,5 +1,5 @@
-@mixin fade-in {
-  animation: 0.4s linear fadein;
+@mixin fade-in($time) {
+  animation: $time linear fadein;
 }
 
 @keyframes fadein {

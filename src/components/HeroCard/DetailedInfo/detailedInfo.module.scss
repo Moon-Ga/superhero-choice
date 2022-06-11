@@ -6,7 +6,7 @@
   height: 100%;
   padding: 20px;
 
-  @include animation.fade-in;
+  @include animation.fade-in(0.4s);
 
   .wrapper {
     display: flex;

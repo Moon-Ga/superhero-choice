@@ -31,7 +31,6 @@
     .cardContainer {
       min-width: 100%;
       max-width: 600px;
-      height: 300px;
       cursor: pointer;
 
       @include responsive.after('lg') {
