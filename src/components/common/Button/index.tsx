@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import cx from 'classnames';
+
 import styles from './button.module.scss';
 
 interface ButtonProps extends ButtonHTMLAttributes<unknown> {
@@ -18,7 +19,13 @@ function Button({
     <button
       // eslint-disable-next-line react/button-has-type
       type={type}
-      className={cx(styles[theme], styles[size], props.className)}
+      className={cx(
+        styles.button,
+        styles[theme],
+        styles[size],
+        props.className
+      )}
+      onClick={props.onClick}
     >
       {children}
     </button>

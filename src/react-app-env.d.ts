@@ -1,5 +1,5 @@
 /// <reference types="react-scripts" />
 type Selected = {
-  heroId: string;
+  heroId: number;
   count: number;
 };

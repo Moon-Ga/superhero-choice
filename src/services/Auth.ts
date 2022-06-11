@@ -6,6 +6,7 @@ import {
   signOut,
   GithubAuthProvider,
 } from 'firebase/auth';
+import { Resetter, SetterOrUpdater } from 'recoil';
 import { firebaseApp } from './Firebase';
 
 const auth = getAuth(firebaseApp);
@@ -31,14 +32,27 @@ export default class Auth {
     signOut(auth);
   };
 
-  static onAuthChange = () => {
+  static onAuthChange = (
+    setUserState: SetterOrUpdater<{
+      name: string;
+      email: string;
+      imageURL: string;
+      uid: string;
+    }>,
+    resetUserState: Resetter
+  ) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // onChange(user);
-        return user;
+        const userData = {
+          name: user.displayName as string,
+          email: user.email as string,
+          imageURL: user.photoURL as string,
+          uid: user.uid as string,
+        };
+        setUserState(userData);
+      } else {
+        resetUserState();
       }
-      // onChange('Guest');
-      return 'Guest';
     });
   };
 }

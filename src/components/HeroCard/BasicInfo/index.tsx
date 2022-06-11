@@ -1,3 +1,5 @@
+import cx from 'classnames';
+
 import { NoImageImage } from 'assets/svgs';
 
 import styles from './basicInfo.module.scss';
@@ -49,7 +51,7 @@ function BasicInfo({ data }: BasicInfoProps) {
     data.biography.fullName.length !== 0 ? data.biography.fullName : data.name;
 
   return (
-    <div className={styles.basicInfo}>
+    <div className={cx(styles.basicInfo)}>
       <div className={styles.imageContainer}>
         <img
           src={data.images.lg}
@@ -61,7 +63,7 @@ function BasicInfo({ data }: BasicInfoProps) {
           className={styles.image}
         />
       </div>
-      <div className={styles.info}>
+      <section className={styles.info}>
         <div className={styles.nameContainer}>
           <p className={styles.name}>{data.name}</p>
           <span className={styles.fullname}>{fullname}</span>
@@ -69,7 +71,7 @@ function BasicInfo({ data }: BasicInfoProps) {
         <div className={styles.stats}>
           <dl className={styles.statItems}>{statItems}</dl>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

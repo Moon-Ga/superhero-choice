@@ -1,29 +1,27 @@
-import { useEffect, useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import { getHero } from 'utils/getHero';
 
 import Spinner from 'components/common/Spinner';
+import Button from 'components/common/Button';
 import BasicInfo from './BasicInfo';
+import DetailedInfo from './DetailedInfo';
 
 import styles from './heroCard.module.scss';
-import DetailedInfo from './DetailedInfo';
 
 type HeroCardProps = {
   heroId: number;
-  onClick: (id: number, heroId: number) => void;
-  setShouldRefetch?: React.Dispatch<React.SetStateAction<boolean>>;
+  onClick?: MouseEventHandler<HTMLDivElement>;
 };
-function HeroCard({ heroId, onClick, setShouldRefetch }: HeroCardProps) {
+function HeroCard({ heroId, onClick }: HeroCardProps) {
   const [isDetail, setIsDetail] = useState<boolean>(false);
 
-  const { data, isError } = useQuery(['superhero', heroId], () =>
-    getHero(heroId)
-  );
+  const onDetailClick = () => {
+    setIsDetail((prev) => !prev);
+  };
 
-  if (isError) {
-    return <div>Error</div>;
-  }
+  const { data } = useQuery(['superhero', heroId], () => getHero(heroId));
 
   if (!data || !data.id) {
     return (
@@ -34,13 +32,24 @@ function HeroCard({ heroId, onClick, setShouldRefetch }: HeroCardProps) {
   }
 
   return (
-    <div
-      role="button"
-      tabIndex={0}
-      className={styles.heroCard}
-      onClick={() => onClick(heroId, data.id)}
-    >
-      {isDetail ? <DetailedInfo data={data} /> : <BasicInfo data={data} />}
+    <div className={styles.heroCard}>
+      <div
+        role="button"
+        tabIndex={0}
+        data-heroid={heroId}
+        onClick={onClick}
+        className={styles.wrapper}
+      >
+        {isDetail ? <DetailedInfo data={data} /> : <BasicInfo data={data} />}
+      </div>
+      <Button
+        theme="secondary"
+        size="sm"
+        className={styles.detailButton}
+        onClick={onDetailClick}
+      >
+        {isDetail ? '기본' : '상세'}
+      </Button>
     </div>
   );
 }

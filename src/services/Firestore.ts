@@ -7,11 +7,12 @@ import {
   setDoc,
   updateDoc,
 } from 'firebase/firestore';
+
 import { firebaseApp } from './Firebase';
 
 const db = getFirestore(firebaseApp);
 
-export default class User {
+export class Firestore {
   static async newUser(uid: string, userData: object) {
     const docRef = doc(db, 'users', uid);
     const docSnap = await getDoc(docRef);
@@ -34,8 +35,43 @@ export default class User {
     const docRef = doc(db, 'users', userid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      await console.log(docSnap.data());
-      updateDoc(docRef, { [item]: data });
+      await updateDoc(docRef, { [item]: data });
     }
+  }
+
+  static async addRankings(heroId: number) {
+    const docRef = doc(db, 'rankings', 'statistics');
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      if (docSnap.data().data) {
+        const itemIndex = docSnap
+          .data()
+          .data.findIndex((data: Selected) => data.heroId === heroId);
+        if (itemIndex !== -1) {
+          const newArray = [...docSnap.data().data];
+          newArray[itemIndex] = {
+            heroId,
+            count: newArray[itemIndex].count + 1,
+          };
+          await updateDoc(docRef, { data: newArray });
+        } else {
+          const newArray = [...docSnap.data().data, { heroId, count: 1 }];
+          await updateDoc(docRef, { data: newArray });
+        }
+      }
+    } else {
+      await setDoc(docRef, { data: [{ heroId, count: 1 }] });
+    }
+  }
+
+  static async getRankings() {
+    const docRef = doc(db, 'rankings', 'statistics');
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      if (docSnap.data().data) {
+        return docSnap.data().data;
+      }
+    }
+    return null;
   }
 }

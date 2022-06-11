@@ -1,20 +1,23 @@
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import store from 'store';
+
+import Auth from 'services/Auth';
+import { useRecoil } from 'hooks';
+import { CurrentUserState } from 'states';
 
 import MainLayout from 'layouts/MainLayout';
 import Choice from './choice';
 import Rankings from './rankings';
-
-import styles from './app.module.scss';
 import Login from './login';
 
+import styles from './app.module.scss';
+
 function App() {
+  const [, setCurrentUser, resetCurrentUser] = useRecoil(CurrentUserState);
+
   useEffect(() => {
-    if (!store.get('selectedHeroes')) {
-      store.set('selectedHeroes', []);
-    }
-  }, []);
+    Auth.onAuthChange(setCurrentUser, resetCurrentUser);
+  }, [resetCurrentUser, setCurrentUser]);
 
   return (
     <div className={styles.appWrapper}>

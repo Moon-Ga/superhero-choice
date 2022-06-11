@@ -1,2 +1,50 @@
+@use 'src/styles/constants/colors';
+@use 'src/styles/mixins/responsive';
+@use 'src/styles/mixins/animation';
+
 .detailedInfo {
+  height: 100%;
+  padding: 20px;
+
+  @include animation.fade-in(0.4s);
+
+  .wrapper {
+    display: flex;
+    height: 100%;
+    overflow: auto;
+
+    @include responsive.after('lg') {
+      display: block;
+    }
+
+    .firstInfo {
+      flex: 1;
+      margin-right: 16px;
+
+      @include responsive.after('lg') {
+        margin-bottom: 8px;
+      }
+    }
+
+    .secondInfo {
+      flex: 2;
+    }
+
+    .item {
+      &:not(:last-child) {
+        margin-bottom: 8px;
+      }
+
+      .label {
+        margin-right: 8px;
+        font-size: 14px;
+        color: colors.$gray-400;
+      }
+
+      .data {
+        font-size: 20px;
+        line-height: 32px;
+      }
+    }
+  }
 }

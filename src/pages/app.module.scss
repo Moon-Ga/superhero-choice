@@ -4,8 +4,8 @@
   display: flex;
   justify-content: center;
   background-image: url('/assets/images/united-wallpaper.webp');
-  background-position: center;
-  background-size: cover;
+  background-position: top;
+  background-size: contain;
 
   .app {
     position: relative;

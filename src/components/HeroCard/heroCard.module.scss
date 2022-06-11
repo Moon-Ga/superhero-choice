@@ -1,4 +1,5 @@
 @use 'src/styles/constants/colors';
+@use 'src/styles/mixins/responsive';
 
 .loading {
   display: flex;
@@ -8,9 +9,24 @@
 }
 
 .heroCard {
+  position: relative;
   width: 100%;
-  height: 100%;
+  height: 250px;
   overflow: hidden;
   background-color: colors.$secondary-bg;
   border-radius: 16px;
+
+  @include responsive.after('lg') {
+    height: 100%;
+  }
+
+  .wrapper {
+    height: 100%;
+  }
+
+  .detailButton {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+  }
 }
