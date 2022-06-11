@@ -1,10 +1,10 @@
 import { MouseEvent, useEffect, useState } from 'react';
 
+import { Firestore } from 'services/Firestore';
 import { maxIdNumber, minIdNumber, randomId } from 'utils/constants';
 
 import HeroCard from 'components/HeroCard';
 
-import { Firestore } from 'services/Firestore';
 import styles from './choice.module.scss';
 
 function Choice() {

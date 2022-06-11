@@ -1,12 +1,14 @@
-import Button from 'components/common/Button';
-import { useRecoil } from 'hooks';
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import Auth from 'services/Auth';
-import { CurrentUserState } from 'states';
 import cx from 'classnames';
 
-import { useState } from 'react';
+import Auth from 'services/Auth';
+import { useRecoil } from 'hooks';
+import { CurrentUserState } from 'states';
+
 import { CloseIcon, HamburgerButtonIcon } from 'assets/svgs';
+import Button from 'components/common/Button';
+
 import styles from './gnb.module.scss';
 
 function GNB() {

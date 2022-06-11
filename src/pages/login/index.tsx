@@ -1,12 +1,14 @@
-import { GithubIcon, GoogleIcon } from 'assets/svgs';
-import cx from 'classnames';
-import Button from 'components/common/Button';
-import { useRecoil } from 'hooks';
 import { MouseEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import cx from 'classnames';
+
 import Auth from 'services/Auth';
 import { Firestore } from 'services/Firestore';
+import { useRecoil } from 'hooks';
 import { CurrentUserState } from 'states';
+
+import { GithubIcon, GoogleIcon } from 'assets/svgs';
+import Button from 'components/common/Button';
 
 import styles from './login.module.scss';
 
@@ -55,10 +57,8 @@ function Login() {
       >
         이전으로
       </Button>
-      <div className={styles.title}>Superhero Choice</div>
-      <div className={styles.description}>
-        Welcome! Login for more features!
-      </div>
+      <h1 className={styles.title}>Superhero Choice</h1>
+      <h2 className={styles.description}>Welcome! Login for more features!</h2>
       <div className={styles.socialLogin}>
         <GoogleIcon
           className={styles.icon}

@@ -1,15 +1,16 @@
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import MainLayout from 'layouts/MainLayout';
 import Auth from 'services/Auth';
 import { useRecoil } from 'hooks';
 import { CurrentUserState } from 'states';
+
+import MainLayout from 'layouts/MainLayout';
 import Choice from './choice';
 import Rankings from './rankings';
+import Login from './login';
 
 import styles from './app.module.scss';
-import Login from './login';
 
 function App() {
   const [, setCurrentUser, resetCurrentUser] = useRecoil(CurrentUserState);

@@ -1,4 +1,4 @@
-import { MouseEventHandler, useEffect, useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import { getHero } from 'utils/getHero';
@@ -6,9 +6,9 @@ import { getHero } from 'utils/getHero';
 import Spinner from 'components/common/Spinner';
 import Button from 'components/common/Button';
 import BasicInfo from './BasicInfo';
+import DetailedInfo from './DetailedInfo';
 
 import styles from './heroCard.module.scss';
-import DetailedInfo from './DetailedInfo';
 
 type HeroCardProps = {
   heroId: number;
@@ -22,12 +22,6 @@ function HeroCard({ heroId, onClick }: HeroCardProps) {
   };
 
   const { data } = useQuery(['superhero', heroId], () => getHero(heroId));
-
-  // useEffect(() => {
-  //   if (data) {
-  //     setIsDetail(true);
-  //   }
-  // }, [data]);
 
   if (!data || !data.id) {
     return (

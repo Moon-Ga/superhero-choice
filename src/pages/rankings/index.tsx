@@ -1,9 +1,10 @@
+import { useEffect, useState } from 'react';
 import _ from 'lodash';
+
+import { Firestore } from 'services/Firestore';
 
 import HeroCard from 'components/HeroCard';
 
-import { Firestore } from 'services/Firestore';
-import { useEffect, useState } from 'react';
 import styles from './rankings.module.scss';
 
 function Rankings() {

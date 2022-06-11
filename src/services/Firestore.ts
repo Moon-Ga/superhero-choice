@@ -1,9 +1,7 @@
 import {
-  collection,
   doc,
   DocumentData,
   getDoc,
-  getDocs,
   getFirestore,
   onSnapshot,
   setDoc,
