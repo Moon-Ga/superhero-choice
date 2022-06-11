@@ -1,4 +1,6 @@
 import { GithubIcon, GoogleIcon } from 'assets/svgs';
+import cx from 'classnames';
+import Button from 'components/common/Button';
 import { useRecoil } from 'hooks';
 import { MouseEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -16,13 +18,11 @@ function Login() {
   const navigate = useNavigate();
 
   const loginWithProvider = (e: MouseEvent<SVGSVGElement>) => {
-    if (onLogin) return null;
-
     setOnLogin(true);
 
     const provider = e.currentTarget.dataset.provider as string;
 
-    return Auth.providerLogin(provider)
+    Auth.providerLogin(provider)
       .then((data) => {
         const userData = {
           name: data.user.displayName,
@@ -47,15 +47,14 @@ function Login() {
   }, [currentUser, navigate]);
 
   return (
-    <main className={styles.login}>
-      {onLogin && <div>로그인 중...</div>}
-      <button
-        type="button"
+    <main className={cx(styles.login, { [styles.onLogin]: onLogin })}>
+      <Button
+        theme="secondary"
         className={styles.returnButton}
         onClick={onReturnButtonClick}
       >
         이전으로
-      </button>
+      </Button>
       <div className={styles.title}>Superhero Choice</div>
       <div className={styles.description}>
         Welcome! Login for more features!

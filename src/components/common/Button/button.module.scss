@@ -1,36 +1,47 @@
 @use 'src/styles/constants/colors';
+@use 'src/styles/mixins/animation';
 
 .button {
   display: flex;
   align-items: center;
   justify-content: center;
   color: colors.$gray-300;
+  transition: all linear 0.2s;
 }
 
 .primary {
   background: colors.$primary-btn;
+
+  &:hover {
+    background: colors.$primary-btn-hover;
+  }
 }
 
 .secondary {
   background: colors.$secondary-btn;
+
+  &:hover {
+    background: colors.$secondary-btn-hover;
+  }
 }
 
 .sm {
-  width: 84px;
-  height: 42px;
+  min-width: 70px;
+  height: 35px;
   font-size: 14px;
   border-radius: 6px;
 }
 
 .md {
-  width: 96px;
-  height: 48px;
+  min-width: 80px;
+  height: 40px;
   font-size: 16px;
   border-radius: 8px;
 }
 
 .lg {
-  padding: 10px 20px;
+  min-width: 90px;
+  height: 45px;
   font-size: 18px;
   border-radius: 10px;
 }

@@ -10,8 +10,6 @@
 
   .returnButton {
     align-self: flex-end;
-    font-size: 24px;
-    color: colors.$gray-300;
   }
 
   .title {
@@ -26,10 +24,28 @@
 
   .socialLogin {
     .icon {
-      width: 64px;
-      height: 64px;
-      margin: 16px;
+      width: 96px;
+      height: 96px;
+      margin: 24px;
       cursor: pointer;
+      transition: all linear 0.2s;
+
+      &:hover {
+        filter: drop-shadow(0 0 8px colors.$primary-btn);
+      }
     }
+  }
+}
+
+.onLogin {
+  filter: blur(5px);
+
+  &::after {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background-color: transparent;
   }
 }

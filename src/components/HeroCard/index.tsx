@@ -1,4 +1,4 @@
-import { MouseEventHandler, useState } from 'react';
+import { MouseEventHandler, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import { getHero } from 'utils/getHero';
@@ -22,6 +22,12 @@ function HeroCard({ heroId, onClick }: HeroCardProps) {
   };
 
   const { data } = useQuery(['superhero', heroId], () => getHero(heroId));
+
+  // useEffect(() => {
+  //   if (data) {
+  //     setIsDetail(true);
+  //   }
+  // }, [data]);
 
   if (!data || !data.id) {
     return (
@@ -48,7 +54,7 @@ function HeroCard({ heroId, onClick }: HeroCardProps) {
         className={styles.detailButton}
         onClick={onDetailClick}
       >
-        Detail
+        {isDetail ? '기본' : '상세'}
       </Button>
     </div>
   );

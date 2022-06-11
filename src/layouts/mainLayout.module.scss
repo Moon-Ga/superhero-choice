@@ -9,7 +9,7 @@
     flex: 1;
 
     @include responsive.after('lg') {
-      padding: 1rem;
+      padding: 16px;
     }
   }
 }
