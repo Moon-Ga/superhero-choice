@@ -31,7 +31,7 @@
     .cardContainer {
       min-width: 100%;
       max-width: 600px;
-      max-height: 300px;
+      height: 300px;
       cursor: pointer;
 
       @include responsive.after('lg') {
@@ -39,7 +39,6 @@
         min-width: 320px;
         max-width: none;
         height: 100%;
-        max-height: none;
       }
     }
   }

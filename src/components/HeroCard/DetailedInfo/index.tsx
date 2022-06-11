@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import styles from './detailedInfo.module.scss';
 
 type DetailedInfoProps = {
@@ -5,7 +6,7 @@ type DetailedInfoProps = {
 };
 function DetailedInfo({ data }: DetailedInfoProps) {
   return (
-    <div className={styles.detailedInfo}>
+    <div className={cx(styles.detailedInfo)}>
       <div className={styles.info}>
         <div className={styles.nameContainer}>
           <p className={styles.name} />

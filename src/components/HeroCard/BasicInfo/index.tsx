@@ -1,3 +1,5 @@
+import cx from 'classnames';
+
 import { NoImageImage } from 'assets/svgs';
 
 import styles from './basicInfo.module.scss';
@@ -49,7 +51,7 @@ function BasicInfo({ data }: BasicInfoProps) {
     data.biography.fullName.length !== 0 ? data.biography.fullName : data.name;
 
   return (
-    <div className={styles.basicInfo}>
+    <div className={cx(styles.basicInfo)}>
       <div className={styles.imageContainer}>
         <img
           src={data.images.lg}

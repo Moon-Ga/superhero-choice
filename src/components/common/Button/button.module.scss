@@ -1,2 +1,36 @@
+@use 'src/styles/constants/colors';
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: colors.$gray-300;
+}
+
 .primary {
+  background: colors.$primary-btn;
+}
+
+.secondary {
+  background: colors.$secondary-btn;
+}
+
+.sm {
+  width: 84px;
+  height: 42px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+.md {
+  width: 96px;
+  height: 48px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.lg {
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 10px;
 }

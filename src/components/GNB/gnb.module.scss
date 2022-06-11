@@ -1,11 +1,38 @@
+@use 'src/styles/constants/colors';
+
 .gnb {
   display: flex;
-  padding: 32px 64px;
+  align-items: center;
+  padding: 16px 32px;
 
   .navigation {
     display: flex;
     flex: 1;
+    align-items: center;
     justify-content: space-around;
+    margin-right: 16px;
     font-size: 24px;
+
+    .navItem {
+      flex: 1;
+      padding: 16px 32px;
+      text-align: center;
+      background: transparent;
+      border-radius: 12px;
+      transition: all 0.2s;
+
+      &:not(.active):hover {
+        background: colors.$secondary-btn-hover;
+      }
+    }
+
+    .active {
+      background: colors.$secondary-btn;
+    }
+  }
+
+  .user {
+    background: transparent;
+    border: 1px solid colors.$purple;
   }
 }

@@ -14,6 +14,15 @@ $gray-900: #111827;
 $primary-bg: #333256;
 $secondary-bg: #3c4273;
 
+$primary-btn: linear-gradient(to right, #b038a0, #ba6beb);
+$primary-btn-hover: linear-gradient(
+  to right,
+  rgba(#b038a0, 0.6),
+  rgba(#ba6beb, 0.6)
+);
+$secondary-btn: #3d9dfc;
+$secondary-btn-hover: rgba(#3d9dfc, 0.5);
+
 $red: #ff3b30;
 $orange: #ff9500;
 $purple: #af52de;

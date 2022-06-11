@@ -3,6 +3,7 @@ import { useRecoil } from 'hooks';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Auth from 'services/Auth';
 import { CurrentUserState } from 'states';
+import cx from 'classnames';
 
 import styles from './gnb.module.scss';
 
@@ -19,14 +20,34 @@ function GNB() {
     }
   };
 
+  const navItems = [
+    { path: '/', label: 'Choice' },
+    { path: '/rankings', label: 'Rankings' },
+  ];
+
   const loginLabel = currentUser.name ? 'Logout' : 'Login';
+  const buttonClassName = currentUser.name ? 'user' : '';
+
   return (
     <header className={styles.gnb}>
       <nav className={styles.navigation}>
-        <NavLink to="/">Choice</NavLink>
-        <NavLink to="Rankings">Rankings</NavLink>
+        {navItems.map((navItem) => (
+          <NavLink
+            key={navItem.label}
+            to={navItem.path}
+            className={({ isActive }) =>
+              cx(styles.navItem, { [styles.active]: isActive })
+            }
+          >
+            {navItem.label}
+          </NavLink>
+        ))}
       </nav>
-      <Button theme="primary" onClick={onLogoutClick}>
+      <Button
+        theme="primary"
+        onClick={onLogoutClick}
+        className={styles[buttonClassName]}
+      >
         {loginLabel}
       </Button>
     </header>
