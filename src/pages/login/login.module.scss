@@ -1,0 +1,51 @@
+@use 'src/styles/constants/colors';
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  margin: auto;
+  text-align: center;
+
+  .returnButton {
+    align-self: flex-end;
+  }
+
+  .title {
+    margin: 48px 0;
+    font-size: 48px;
+  }
+
+  .description {
+    margin-bottom: 32px;
+    font-size: 32px;
+  }
+
+  .socialLogin {
+    .icon {
+      width: 96px;
+      height: 96px;
+      margin: 24px;
+      cursor: pointer;
+      transition: all linear 0.2s;
+
+      &:hover {
+        filter: drop-shadow(0 0 8px colors.$primary-btn);
+      }
+    }
+  }
+}
+
+.onLogin {
+  filter: blur(5px);
+
+  &::after {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background-color: transparent;
+  }
+}

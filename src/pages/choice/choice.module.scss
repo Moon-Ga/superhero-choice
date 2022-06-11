@@ -2,9 +2,17 @@
 @use 'src/styles/constants/colors';
 
 .choice {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
+
+  .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+  }
 
   @include responsive.after('lg') {
     flex-direction: row;
@@ -16,21 +24,22 @@
     display: flex;
     flex: 1;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
-    margin: 1rem;
+    margin: 16px;
 
     .cardContainer {
-      max-height: 300px;
+      min-width: 100%;
+      max-width: 600px;
       cursor: pointer;
 
       @include responsive.after('lg') {
+        width: 35vh;
+        min-width: 320px;
+        max-width: none;
         height: 100%;
-        max-height: none;
+        min-height: 750px;
       }
     }
-  }
-
-  .line {
-    border-top: 10px solid colors.$black;
   }
 }

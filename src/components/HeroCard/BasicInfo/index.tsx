@@ -1,3 +1,5 @@
+import cx from 'classnames';
+
 import { NoImageImage } from 'assets/svgs';
 
 import styles from './basicInfo.module.scss';
@@ -6,7 +8,7 @@ type BasicInfoProps = {
   data: HeroInfo;
 };
 function BasicInfo({ data }: BasicInfoProps) {
-  const labels = ['근력', '지능', '속력', '내구력', '위력', '전투력'];
+  const labels = ['근력', '지력', '속력', '내구력', '위력', '전투 기술'];
 
   const statColor = (statpoint: string) => {
     if (statpoint === '정보 없음') {
@@ -38,23 +40,21 @@ function BasicInfo({ data }: BasicInfoProps) {
     const key = `${data.id}-${stat}-${idx}`;
     const point = stat !== 'null' ? stat : '정보 없음';
     return (
-      <li key={key} className={styles.statItem}>
-        <span className={styles.label}>{labels[idx]}</span>
-        <span className={styles[statColor(point)]}>{point}</span>
-      </li>
+      <div key={key} className={styles.statItem}>
+        <dt className={styles.label}>{labels[idx]}</dt>
+        <dd className={styles[statColor(point)]}>{point}</dd>
+      </div>
     );
   });
 
   const fullname =
-    data.biography['full-name'].length !== 0
-      ? data.biography['full-name']
-      : data.name;
+    data.biography.fullName.length !== 0 ? data.biography.fullName : data.name;
 
   return (
-    <div className={styles.basicInfo}>
+    <div className={cx(styles.basicInfo)}>
       <div className={styles.imageContainer}>
         <img
-          src={data.image.url}
+          src={data.images.lg}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
             currentTarget.src = NoImageImage;
@@ -63,15 +63,15 @@ function BasicInfo({ data }: BasicInfoProps) {
           className={styles.image}
         />
       </div>
-      <div className={styles.info}>
+      <section className={styles.info}>
         <div className={styles.nameContainer}>
           <p className={styles.name}>{data.name}</p>
           <span className={styles.fullname}>{fullname}</span>
         </div>
         <div className={styles.stats}>
-          <ul className={styles.statItems}>{statItems}</ul>
+          <dl className={styles.statItems}>{statItems}</dl>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

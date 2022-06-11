@@ -1,3 +1,1 @@
-import { SelectedHerosState } from './Atoms';
-
-export { SelectedHerosState };
+export { CurrentUserState } from './Atoms';

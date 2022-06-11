@@ -1,0 +1,13 @@
+@mixin fade-in($time) {
+  animation: $time linear fadein;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
