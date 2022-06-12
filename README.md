@@ -5,9 +5,9 @@
 
 ## 1. 구현된 프로젝트 확인 방법
 
-### Netlify로 배포된 페이지
+### Vercel로 배포된 페이지
 
-🔗 [링크](https://superhero-choice.netlify.app/)
+🔗 [링크](https://superhero-choice.vercel.app/)
 
 ## 2. 폴더 구조
 
