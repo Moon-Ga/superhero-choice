@@ -2,6 +2,7 @@ import cx from 'classnames';
 
 import { NoImageImage } from 'assets/svgs';
 
+import { useRef } from 'react';
 import styles from './basicInfo.module.scss';
 
 type BasicInfoProps = {
@@ -9,6 +10,7 @@ type BasicInfoProps = {
 };
 function BasicInfo({ data }: BasicInfoProps) {
   const labels = ['근력', '지력', '속력', '내구력', '위력', '전투 기술'];
+  const imgContainerRef = useRef<HTMLDivElement>(null);
 
   const statColor = (statpoint: string) => {
     if (statpoint === '정보 없음') {
@@ -52,9 +54,9 @@ function BasicInfo({ data }: BasicInfoProps) {
 
   return (
     <div className={cx(styles.basicInfo)}>
-      <div className={styles.imageContainer}>
+      <div ref={imgContainerRef} className={styles.imageContainer}>
         <img
-          src={data.images.lg}
+          src={data.images.md}
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
             currentTarget.src = NoImageImage;
