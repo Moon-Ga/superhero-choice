@@ -1,0 +1,44 @@
+@use 'src/styles/constants/colors';
+@use 'src/styles/mixins/responsive';
+@use 'src/styles/mixins/animation';
+
+.comment {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 16px;
+  cursor: default;
+
+  @include animation.fade-in(0.2s);
+
+  .closeButton {
+    place-self: flex-end;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+
+  .list {
+    height: 100%;
+    margin: 16px 0;
+    overflow: auto;
+
+    .item {
+      display: flex;
+      flex-direction: column;
+
+      &:not(:last-child) {
+        margin-bottom: 16px;
+      }
+    }
+  }
+
+  .form {
+    .input {
+      width: 100%;
+      font-size: 16px;
+      border: 1px solid black;
+    }
+  }
+}
