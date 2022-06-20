@@ -75,20 +75,32 @@ export class Firestore {
     return null;
   }
 
-  static async getComments(heroId: number) {
+  static async getComments(
+    heroId: number,
+    updateComments: React.Dispatch<React.SetStateAction<CommentItem[]>>
+  ) {
     const docRef = doc(db, 'comments', heroId.toString());
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      return docSnap.data();
-    }
-    return null;
+    await onSnapshot(docRef, (document) => {
+      if (document.exists()) {
+        updateComments(document.data().data);
+      }
+    });
   }
 
-  static async addComment(heroId: number, userId: 'string', data: object) {
+  static async addComment(heroId: number, userInfo: UserInfo, comment: string) {
     const docRef = doc(db, 'comments', heroId.toString());
     const docSnap = await getDoc(docRef);
     if (!docSnap.exists()) {
-      await setDoc(docRef, [{ id: 0, userId, data }]);
+      await setDoc(docRef, {
+        data: [{ userId: userInfo.uid, name: userInfo.name, comment }],
+      });
+    } else {
+      await updateDoc(docRef, {
+        data: [
+          ...docSnap.data().data,
+          { userId: userInfo.uid, name: userInfo.name, comment },
+        ],
+      });
     }
   }
 }

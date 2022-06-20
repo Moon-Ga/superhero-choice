@@ -39,7 +39,9 @@ function HeroCard({ heroId, onClick }: HeroCardProps) {
 
   const content = () => {
     if (isComment) {
-      return <Comment setIsComment={setIsComment} />;
+      return (
+        <Comment data={data} heroId={heroId} setIsComment={setIsComment} />
+      );
     }
 
     return (
