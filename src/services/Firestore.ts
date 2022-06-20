@@ -74,4 +74,21 @@ export class Firestore {
     }
     return null;
   }
+
+  static async getComments(heroId: number) {
+    const docRef = doc(db, 'comments', heroId.toString());
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return docSnap.data();
+    }
+    return null;
+  }
+
+  static async addComment(heroId: number, userId: 'string', data: object) {
+    const docRef = doc(db, 'comments', heroId.toString());
+    const docSnap = await getDoc(docRef);
+    if (!docSnap.exists()) {
+      await setDoc(docRef, [{ id: 0, userId, data }]);
+    }
+  }
 }
