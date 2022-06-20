@@ -1,4 +1,4 @@
-import { MouseEventHandler, useState } from 'react';
+import { MouseEventHandler, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 
 import { getHero } from 'utils/getHero';
@@ -7,15 +7,16 @@ import Spinner from 'components/common/Spinner';
 import Button from 'components/common/Button';
 import BasicInfo from './BasicInfo';
 import DetailedInfo from './DetailedInfo';
+import Comment from './Comment';
 
 import styles from './heroCard.module.scss';
-import Comment from './Comment';
 
 type HeroCardProps = {
   heroId: number;
   onClick?: MouseEventHandler<HTMLDivElement>;
+  isSelected?: boolean;
 };
-function HeroCard({ heroId, onClick }: HeroCardProps) {
+function HeroCard({ heroId, onClick, isSelected }: HeroCardProps) {
   const [isDetail, setIsDetail] = useState<boolean>(false);
   const [isComment, setIsComment] = useState<boolean>(false);
 
@@ -24,10 +25,17 @@ function HeroCard({ heroId, onClick }: HeroCardProps) {
   };
 
   const onCommentClick = () => {
-    setIsComment((prev) => !prev);
+    setIsComment(true);
   };
 
   const { data } = useQuery(['superhero', heroId], () => getHero(heroId));
+
+  useEffect(() => {
+    if (onClick) {
+      setIsDetail(false);
+      setIsComment(false);
+    }
+  }, [isSelected, onClick]);
 
   if (!data || !data.id) {
     return (

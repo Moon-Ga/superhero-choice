@@ -1,8 +1,11 @@
-import { CloseIcon } from 'assets/svgs';
-import { useRecoil } from 'hooks';
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
+
+import { useRecoil } from 'hooks';
 import { Firestore } from 'services/Firestore';
 import { CurrentUserState } from 'states';
+
+import { CloseIcon } from 'assets/svgs';
+
 import styles from './comment.module.scss';
 
 type CommentProps = {
