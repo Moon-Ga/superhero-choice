@@ -4,7 +4,7 @@ import { useRecoil } from 'hooks';
 import { Firestore } from 'services/Firestore';
 import { CurrentUserState } from 'states';
 
-import { CloseIcon } from 'assets/svgs';
+import { CloseIcon, DeleteIcon } from 'assets/svgs';
 
 import styles from './comment.module.scss';
 
@@ -42,6 +42,16 @@ function Comment({ data, heroId, setIsComment }: CommentProps) {
     return Firestore.addComment(heroId, userInfo, current.value);
   };
 
+  const onDeleteClick = (comment: CommentItem, index: number) => {
+    if (comment.userId === userInfo.uid) {
+      if (window.confirm('코멘트 삭제')) {
+        Firestore.deleteComment(heroId, index);
+      }
+    } else {
+      console.log('no');
+    }
+  };
+
   useEffect(() => {
     setIsUser(userInfo.name.length !== 0);
     Firestore.getComments(heroId, setCommentData);
@@ -51,8 +61,14 @@ function Comment({ data, heroId, setIsComment }: CommentProps) {
     const key = `${comment.userId}-${idx}`;
     return (
       <li key={key} className={styles.item}>
-        <span className={styles.name}>{comment.name}</span>
-        <span className={styles.content}>{comment.comment}</span>
+        <div className={styles.contentWrapper}>
+          <span className={styles.name}>{comment.name}</span>
+          <span className={styles.content}>{comment.comment}</span>
+        </div>
+        <DeleteIcon
+          onClick={() => onDeleteClick(comment, idx)}
+          className={styles.deleteIcon}
+        />
       </li>
     );
   });

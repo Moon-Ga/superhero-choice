@@ -36,7 +36,8 @@
 
     .item {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
       padding: 8px;
       background: colors.$tertiary-bg;
       border-radius: 8px;
@@ -45,13 +46,24 @@
         margin-bottom: 16px;
       }
 
-      .name {
-        margin-bottom: 8px;
+      .contentWrapper {
+        display: flex;
+        flex-direction: column;
+        .name {
+          margin-bottom: 8px;
+        }
+
+        .content {
+          font-size: 18px;
+          word-break: break-all;
+        }
       }
 
-      .content {
-        font-size: 18px;
-        word-break: break-all;
+      .deleteIcon {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        fill: colors.$red;
       }
     }
   }

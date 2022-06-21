@@ -103,4 +103,17 @@ export class Firestore {
       });
     }
   }
+
+  static async deleteComment(heroId: number, index: number) {
+    const docRef = doc(db, 'comments', heroId.toString());
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const filtered = docSnap
+        .data()
+        .data.filter((item: CommentItem, idx: number) => {
+          return index !== idx;
+        });
+      await updateDoc(docRef, { data: filtered });
+    }
+  }
 }
