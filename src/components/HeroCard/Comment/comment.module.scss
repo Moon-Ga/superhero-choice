@@ -36,8 +36,8 @@
 
     .item {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       padding: 8px;
       background: colors.$tertiary-bg;
       border-radius: 8px;
@@ -49,6 +49,7 @@
       .contentWrapper {
         display: flex;
         flex-direction: column;
+
         .name {
           margin-bottom: 8px;
         }

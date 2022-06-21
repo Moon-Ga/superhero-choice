@@ -6,6 +6,7 @@ import { CurrentUserState } from 'states';
 
 import { CloseIcon, DeleteIcon } from 'assets/svgs';
 
+import Confirm from 'components/common/Confirm';
 import styles from './comment.module.scss';
 
 type CommentProps = {
@@ -18,6 +19,7 @@ function Comment({ data, heroId, setIsComment }: CommentProps) {
   const [inputValue, setInputValue] = useState<string>('');
   const [commentData, setCommentData] = useState<CommentItem[]>([]);
   const [wordCount, setWordCount] = useState(0);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const [userInfo] = useRecoil(CurrentUserState);
 
@@ -43,13 +45,8 @@ function Comment({ data, heroId, setIsComment }: CommentProps) {
   };
 
   const onDeleteClick = (comment: CommentItem, index: number) => {
-    if (comment.userId === userInfo.uid) {
-      if (window.confirm('코멘트 삭제')) {
-        Firestore.deleteComment(heroId, index);
-      }
-    } else {
-      console.log('no');
-    }
+    setShowConfirm(true);
+    // Firestore.deleteComment(heroId, index);
   };
 
   useEffect(() => {
@@ -59,16 +56,23 @@ function Comment({ data, heroId, setIsComment }: CommentProps) {
 
   const commentList = commentData.map((comment: CommentItem, idx) => {
     const key = `${comment.userId}-${idx}`;
+    const isUserMatch = comment.userId === userInfo.uid;
+
     return (
       <li key={key} className={styles.item}>
         <div className={styles.contentWrapper}>
           <span className={styles.name}>{comment.name}</span>
           <span className={styles.content}>{comment.comment}</span>
         </div>
-        <DeleteIcon
-          onClick={() => onDeleteClick(comment, idx)}
-          className={styles.deleteIcon}
-        />
+        {isUserMatch && (
+          <DeleteIcon
+            onClick={() => onDeleteClick(comment, idx)}
+            className={styles.deleteIcon}
+          />
+        )}
+        {showConfirm && (
+          <Confirm setShowConfirm={setShowConfirm}>삭제하시겠습니까?</Confirm>
+        )}
       </li>
     );
   });
