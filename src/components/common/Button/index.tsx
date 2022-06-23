@@ -6,7 +6,7 @@ import styles from './button.module.scss';
 interface ButtonProps extends ButtonHTMLAttributes<unknown> {
   theme: 'primary' | 'secondary';
   size?: 'sm' | 'md' | 'lg';
-  children?: string | ReactNode;
+  children?: ReactNode;
 }
 function Button({
   theme,

@@ -6,3 +6,4 @@ export { ReactComponent as GithubIcon } from './github-icon.svg';
 export { ReactComponent as GoogleIcon } from './google-icon.svg';
 export { ReactComponent as HamburgerButtonIcon } from './hamburger-button-icon.svg';
 export { ReactComponent as CloseIcon } from './close-icon.svg';
+export { ReactComponent as DeleteIcon } from './delete-icon.svg';

@@ -18,10 +18,10 @@
 }
 
 .secondary {
-  background: colors.$secondary-btn;
+  background: colors.$secondary-btn-hover;
 
   &:hover {
-    background: colors.$secondary-btn-hover;
+    background: colors.$secondary-btn;
   }
 }
 
