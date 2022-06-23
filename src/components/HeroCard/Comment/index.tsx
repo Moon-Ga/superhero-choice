@@ -1,4 +1,11 @@
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
+import {
+  ChangeEvent,
+  FormEvent,
+  MouseEvent,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { useRecoil } from 'hooks';
 import { Firestore } from 'services/Firestore';
@@ -20,6 +27,7 @@ function Comment({ data, heroId, setIsComment }: CommentProps) {
   const [commentData, setCommentData] = useState<CommentItem[]>([]);
   const [wordCount, setWordCount] = useState(0);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [selectedComment, setSelectedComment] = useState(0);
 
   const [userInfo] = useRecoil(CurrentUserState);
 
@@ -46,10 +54,16 @@ function Comment({ data, heroId, setIsComment }: CommentProps) {
     return Firestore.addComment(heroId, userInfo, current.value);
   };
 
-  const onDeleteClick = (comment: CommentItem, index: number) => {
+  const onDeleteClick = (e: MouseEvent<SVGSVGElement>) => {
+    const { index } = e.currentTarget.dataset;
     setShowConfirm(true);
+    setSelectedComment(Number(index));
     bodyRef.style.overflow = 'hidden';
-    // Firestore.deleteComment(heroId, index);
+  };
+
+  const onConfirmClick = () => {
+    const selected = selectedComment;
+    Firestore.deleteComment(heroId, selected);
   };
 
   useEffect(() => {
@@ -69,12 +83,18 @@ function Comment({ data, heroId, setIsComment }: CommentProps) {
         </div>
         {isUserMatch && (
           <DeleteIcon
-            onClick={() => onDeleteClick(comment, idx)}
+            onClick={onDeleteClick}
             className={styles.deleteIcon}
+            data-index={idx}
           />
         )}
-        {showConfirm && (
-          <Confirm setShowConfirm={setShowConfirm}>삭제하시겠습니까?</Confirm>
+        {showConfirm && selectedComment === idx && (
+          <Confirm
+            setShowConfirm={setShowConfirm}
+            onConfirmClick={onConfirmClick}
+          >
+            삭제하시겠습니까?
+          </Confirm>
         )}
       </li>
     );

@@ -41,6 +41,7 @@
 
     .select {
       display: flex;
+      align-items: center;
       justify-content: flex-end;
 
       .yes,
@@ -52,6 +53,11 @@
 
       .yes {
         color: colors.$green;
+      }
+
+      .line {
+        height: 30px;
+        border-right: 1px solid colors.$gray-300;
       }
 
       .no {
