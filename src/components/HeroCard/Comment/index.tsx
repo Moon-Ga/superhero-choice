@@ -24,6 +24,8 @@ function Comment({ data, heroId, setIsComment }: CommentProps) {
   const [userInfo] = useRecoil(CurrentUserState);
 
   const commentRef = useRef(null);
+  const bodyRef = useRef<HTMLBodyElement>(document.querySelector('body'))
+    .current as unknown as HTMLBodyElement;
 
   const placeholder = isUser ? '코멘트를 입력하세요.' : '로그인 해야 합니다.';
 
@@ -46,6 +48,7 @@ function Comment({ data, heroId, setIsComment }: CommentProps) {
 
   const onDeleteClick = (comment: CommentItem, index: number) => {
     setShowConfirm(true);
+    bodyRef.style.overflow = 'hidden';
     // Firestore.deleteComment(heroId, index);
   };
 

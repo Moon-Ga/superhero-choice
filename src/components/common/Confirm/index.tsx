@@ -8,9 +8,12 @@ type ConfirmProps = {
 };
 function Confirm({ children, setShowConfirm }: ConfirmProps) {
   const modalRoot = useRef<HTMLDivElement>(document.querySelector('#modal'));
+  const bodyRef = useRef<HTMLBodyElement>(document.querySelector('body'))
+    .current as unknown as HTMLBodyElement;
 
   const onToggleClick = () => {
     setShowConfirm(false);
+    bodyRef.style.overflow = '';
   };
 
   return createPortal(
