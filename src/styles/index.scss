@@ -8,8 +8,4 @@
 html {
   color: colors.$gray-300;
   user-select: none;
-
-  @include responsive.after('lg') {
-    font-size: 20px;
-  }
 }

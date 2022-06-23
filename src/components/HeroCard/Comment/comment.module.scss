@@ -1,0 +1,91 @@
+@use 'src/styles/constants/colors';
+@use 'src/styles/mixins/responsive';
+@use 'src/styles/mixins/animation';
+
+.comment {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 16px;
+  cursor: default;
+
+  @include animation.fade-in(0.2s);
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .name {
+      font-size: 20px;
+    }
+
+    .closeButton {
+      place-self: flex-end;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+  }
+
+  .list {
+    height: 100%;
+    margin: 16px 0;
+    overflow: auto;
+
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px;
+      background: colors.$tertiary-bg;
+      border-radius: 8px;
+
+      &:not(:last-child) {
+        margin-bottom: 16px;
+      }
+
+      .contentWrapper {
+        display: flex;
+        flex-direction: column;
+
+        .name {
+          margin-bottom: 8px;
+        }
+
+        .content {
+          font-size: 18px;
+          word-break: break-all;
+        }
+      }
+
+      .deleteIcon {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        fill: colors.$red;
+      }
+    }
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .input {
+      width: 100%;
+      padding: 4px 8px;
+      margin-bottom: 2px;
+      font-size: 16px;
+      color: colors.$gray-300;
+      background: colors.$tertiary-bg;
+      border-radius: 8px;
+    }
+
+    .wordCount {
+      font-size: 14px;
+    }
+  }
+}

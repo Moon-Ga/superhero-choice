@@ -1,0 +1,69 @@
+@use 'src/styles/constants/colors';
+
+.confirm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  &::after {
+    position: absolute;
+    z-index: 9;
+    display: block;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background-color: colors.$black;
+    opacity: 0.6;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 400px;
+    height: 200px;
+    overflow: hidden;
+    background: colors.$secondary-bg;
+    border-radius: 16px;
+
+    .content {
+      padding: 16px;
+      margin: auto;
+      font-size: 24px;
+    }
+
+    .select {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      .yes,
+      .no {
+        width: 96px;
+        font-size: 24px;
+        line-height: 48px;
+      }
+
+      .yes {
+        color: colors.$green;
+      }
+
+      .line {
+        height: 30px;
+        border-right: 1px solid colors.$gray-300;
+      }
+
+      .no {
+        color: colors.$red;
+      }
+    }
+  }
+}

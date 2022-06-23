@@ -4,11 +4,14 @@ import _ from 'lodash';
 import { Firestore } from 'services/Firestore';
 
 import HeroCard from 'components/HeroCard';
+import ToTopButton from 'components/common/ToTopButton';
 
 import styles from './rankings.module.scss';
 
 function Rankings() {
   const [rankingsList, setRankingsList] = useState<Selected[]>([]);
+
+  const [target, setTarget] = useState<HTMLSpanElement | null>(null);
 
   useEffect(() => {
     Firestore.getRankings().then((data) => {
@@ -32,6 +35,8 @@ function Rankings() {
   return (
     <main className={styles.rankings}>
       <ul className={styles.rankingsList}>{list}</ul>
+      <span className={styles.target} ref={setTarget} />
+      <ToTopButton target={target} />
     </main>
   );
 }

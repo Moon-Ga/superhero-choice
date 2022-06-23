@@ -1,0 +1,29 @@
+@use 'src/styles/constants/colors';
+@use 'src/styles/mixins/responsive';
+
+.toTopButton {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: 56px;
+  height: 56px;
+  color: colors.$gray-300;
+  visibility: hidden;
+  background: colors.$primary-btn-hover;
+  border-radius: 100%;
+  opacity: 0;
+  transition: all linear 0.2s;
+
+  &:hover {
+    background: colors.$primary-btn;
+  }
+
+  @include responsive.after('xl') {
+    left: calc(50% + 568px);
+  }
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+}
